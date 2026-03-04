@@ -11,6 +11,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=Work+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
   <link rel="stylesheet" href="style.css?v=20250305"/>
   <!-- Google reCAPTCHA v2 -->
+  <script src="https://www.google.com/recaptcha/api.js" async defer></script>
   <!-- Invisible reCAPTCHA: silent verification, no checkbox shown to user -->
   <style>
 
@@ -342,7 +343,12 @@
           <textarea name="description" id="description" placeholder="Briefly describe what needs to be tested, your tech stack, and your goals..." required></textarea>
         </div>
 
-        <button type="submit" class="btn-submit" id="submit-btn">Send &amp; Book Free Consultation</button>
+        <button type="submit"
+          class="btn-submit g-recaptcha"
+          id="submit-btn"
+          data-sitekey="6LdV9X8sAAAAAGXDPbquKTH_2B1Sq5Mtvo7tYAkD"
+          data-callback="onCaptchaPassed"
+          data-action="submit">Send &amp; Book Free Consultation</button>
         <p class="form-note">🔒 Your details are sent securely and privately.</p>
       </form>
     </div>
@@ -493,11 +499,13 @@
     }
   }
 
-  // ── FORM SUBMIT FLOW ──
+  // ── FORM & CAPTCHA FLOW ──
+  let pendingFormData = null;
+
   function handleSubmit(e) {
     e.preventDefault();
 
-    // Validate required fields
+    // Validate required fields first
     const fields = ['fname','lname','email','service','description'];
     let valid = true;
     fields.forEach(id => {
@@ -514,55 +522,78 @@
       return;
     }
 
-    // Show sending popup
-    const overlay = document.getElementById('captcha-overlay');
-    document.getElementById('state-captcha').style.display = 'none';
-    document.getElementById('state-sending').style.display = 'flex';
-    document.getElementById('state-success').style.display = 'none';
-    document.getElementById('captcha-cancel-btn').style.display = 'none';
-    overlay.classList.add('active');
+    // Show the popup immediately in "Verifying" state
+    // Invisible reCAPTCHA fires automatically via the button's data-callback
+    pendingFormData = new FormData(document.getElementById('contact-form'));
+    showState('captcha');
+    document.getElementById('captcha-overlay').classList.add('active');
+    // Programmatically trigger invisible reCAPTCHA
+    if (window.grecaptcha) {
+      grecaptcha.execute();
+    } else {
+      // Fallback if reCAPTCHA hasn't loaded (e.g. no site key yet)
+      onCaptchaPassed('no-recaptcha-token');
+    }
+  }
 
-    // Submit to Formspree
-    const formData = new FormData(document.getElementById('contact-form'));
-    fetch('https://formspree.io/f/xqeyzzzr', {
-      method: 'POST',
-      body: formData,
-      headers: { 'Accept': 'application/json' }
-    })
-    .then(res => {
-      if (res.ok) {
-        document.getElementById('state-sending').style.display = 'none';
-        document.getElementById('state-success').style.display = 'flex';
-        setTimeout(() => {
-          overlay.classList.remove('active');
-          document.getElementById('contact-form').reset();
-          document.getElementById('state-sending').style.display = 'none';
-          document.getElementById('state-success').style.display = 'none';
-          document.getElementById('state-captcha').style.display = 'block';
-          document.getElementById('contact-main').scrollIntoView({ behavior: 'smooth' });
-        }, 2500);
-      } else {
-        res.json().then(data => {
-          overlay.classList.remove('active');
-          const reason = (data.errors && data.errors.map(e => e.message).join(', ')) || data.error || 'Unknown error';
-          alert('Submission failed (' + res.status + '): ' + reason);
-        }).catch(() => {
-          overlay.classList.remove('active');
-          alert('Submission failed with status: ' + res.status);
-        });
-      }
-    })
-    .catch(() => {
-      overlay.classList.remove('active');
-      alert('Network error. Please check your connection and try again.');
-    });
+  function showState(state) {
+    document.getElementById('state-captcha').style.display  = state === 'captcha'  ? 'block' : 'none';
+    document.getElementById('state-sending').style.display  = state === 'sending'  ? 'flex'  : 'none';
+    document.getElementById('state-success').style.display  = state === 'success'  ? 'flex'  : 'none';
+    document.getElementById('captcha-cancel-btn').style.display = state === 'captcha' ? 'inline-block' : 'none';
   }
 
   function closeCaptcha() {
     document.getElementById('captcha-overlay').classList.remove('active');
+    // Reset reCAPTCHA widget so it's fresh next time
+    if (window.grecaptcha) {
+      try { grecaptcha.reset(); } catch(e) {}
+    }
+    pendingFormData = null;
+    showState('captcha');
   }
 
-  // Close popup by clicking backdrop
+  // Called automatically by reCAPTCHA when user checks the box
+  async function onCaptchaPassed(token) {
+    showState('sending');
+
+    // Append the reCAPTCHA token so Formspree can verify it
+    pendingFormData.append('g-recaptcha-response', token);
+
+    try {
+      const res = await fetch('https://formspree.io/f/xqeyzzzr', {
+        method: 'POST',
+        body: pendingFormData,
+        headers: { 'Accept': 'application/json' }
+      });
+
+      if (res.ok) {
+        showState('success');
+        // After 2.5s: close popup, reset form, scroll back to top of form
+        setTimeout(() => {
+          document.getElementById('captcha-overlay').classList.remove('active');
+          document.getElementById('contact-form').reset();
+          showState('captcha');
+          document.getElementById('contact-main').scrollIntoView({ behavior: 'smooth' });
+        }, 2500);
+      } else {
+        closeCaptcha();
+        alert('Something went wrong sending your message. Please try again.');
+      }
+    } catch (err) {
+      closeCaptcha();
+      alert('Network error. Please check your connection and try again.');
+    }
+  }
+
+  function onCaptchaExpired() {
+    // Token expired — reset so user can try again
+    if (window.grecaptcha) {
+      try { grecaptcha.reset(); } catch(e) {}
+    }
+  }
+
+  // Close popup by clicking the dark backdrop
   document.getElementById('captcha-overlay').addEventListener('click', function(e) {
     if (e.target === this) closeCaptcha();
   });
