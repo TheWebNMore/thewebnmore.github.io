@@ -5,117 +5,117 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>About | TheWebNMore Solutions</title>
   <meta name="description" content="20+ years of software QA experience across healthcare, education, biotech, e-Commerce, gaming and more."/>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400;1,500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=Work+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
   <link rel="stylesheet" href="style.css"/>
   <style>
 
     /* ── BIO SECTION ── */
-    #bio { background: var(--white); padding: 7rem 5%; }
+    #bio { background: var(--bg3); padding: 7rem 5%; }
     .bio-grid {
       display: grid; grid-template-columns: 1fr 1.4fr;
       gap: 5rem; align-items: start; max-width: 1100px; margin: 0 auto;
     }
     .bio-aside { position: sticky; top: 100px; }
     .bio-badge {
-      background: var(--light);
+      background: var(--bg3);
       border: 1px solid var(--border-grey);
       padding: 2.5rem;
       text-align: center;
     }
     .bio-badge .big-num {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 5rem; font-weight: 300; color: var(--gold); line-height: 1;
+      font-family: 'Raleway', sans-serif;
+      font-size: 5rem; font-weight: 300; color: var(--blue); line-height: 1;
     }
     .bio-badge .big-label { font-size: 0.8rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
     .bio-stats { margin-top: 1.5rem; display: flex; flex-direction: column; gap: 1px; }
     .bio-stat {
-      background: var(--white); border: 1px solid var(--border-grey);
+      background: var(--bg3); border: 1px solid var(--border-grey);
       padding: 1rem 1.5rem;
       display: flex; justify-content: space-between; align-items: center;
     }
     .bio-stat-label { font-size: 0.82rem; color: var(--muted); }
-    .bio-stat-val { font-size: 0.88rem; font-weight: 500; color: var(--ink); }
+    .bio-stat-val { font-size: 0.88rem; font-weight: 500; color: var(--text); }
 
-    .bio-main h2 { color: var(--ink); margin-bottom: 0.5rem; }
+    .bio-main h2 { color: var(--text); margin-bottom: 0.5rem; }
     .bio-main p { margin-bottom: 1.3rem; }
     .quote-block {
-      border-left: 3px solid var(--gold);
-      background: var(--gold-pale);
+      border-left: 3px solid var(--blue);
+      background: var(--bg3);
       padding: 1.5rem 2rem; margin: 2.5rem 0;
     }
     .quote-block p {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 1.25rem; font-style: italic; color: var(--ink);
+      font-family: 'Raleway', sans-serif;
+      font-size: 1.25rem; font-style: italic; color: var(--text);
       line-height: 1.6; margin: 0;
     }
 
     /* ── TECH / EXPERTISE ── */
-    #expertise { background: var(--light); padding: 7rem 5%; }
+    #expertise { background: var(--bg3); padding: 7rem 5%; }
     .expertise-inner { max-width: 1100px; margin: 0 auto; }
     .exp-grid {
       display: grid; grid-template-columns: repeat(3, 1fr);
       gap: 1.5rem; margin-top: 3rem;
     }
     .exp-card {
-      background: var(--white);
+      background: var(--bg3);
       border: 1px solid var(--border-grey);
       padding: 2rem;
       transition: border-color 0.3s, box-shadow 0.3s;
     }
-    .exp-card:hover { border-color: var(--gold); box-shadow: var(--shadow); }
+    .exp-card:hover { border-color: var(--blue); box-shadow: var(--shadow); }
     .exp-card h4 {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 1.1rem; color: var(--ink); margin-bottom: 1rem;
+      font-family: 'Raleway', sans-serif;
+      font-size: 1.1rem; color: var(--text); margin-bottom: 1rem;
       padding-bottom: 0.6rem; border-bottom: 1px solid var(--border-grey);
     }
     .exp-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; }
     .exp-tag {
       font-size: 0.72rem; letter-spacing: 0.07em;
-      background: var(--light); border: 1px solid var(--border-grey);
+      background: var(--bg3); border: 1px solid var(--border-grey);
       color: var(--muted); padding: 0.28rem 0.7rem;
     }
 
     /* ── INDUSTRIES ── */
-    #industries { background: var(--white); padding: 7rem 5%; }
+    #industries { background: var(--bg3); padding: 7rem 5%; }
     .ind-grid {
       display: grid; grid-template-columns: repeat(3, 1fr);
       gap: 1px; background: var(--border-grey);
       margin-top: 3rem; max-width: 900px;
     }
     .ind-card {
-      background: var(--white); padding: 2.5rem 2rem; text-align: center;
+      background: var(--bg3); padding: 2.5rem 2rem; text-align: center;
       transition: background 0.3s;
     }
-    .ind-card:hover { background: var(--gold-pale); }
+    .ind-card:hover { background: var(--bg3); }
     .ind-icon { font-size: 2.2rem; display: block; margin-bottom: 0.8rem; }
-    .ind-card h4 { font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; color: var(--ink); }
+    .ind-card h4 { font-family: 'Raleway', sans-serif; font-size: 1.1rem; color: var(--text); }
     .ind-card p { font-size: 0.82rem; margin-top: 0.4rem; }
 
     /* ── COLLABORATION ── */
-    #collab { background: var(--ink); padding: 7rem 5%; }
+    #collab { background: var(--bg); padding: 7rem 5%; }
     .collab-inner { max-width: 900px; margin: 0 auto; }
-    #collab .eyebrow { color: var(--gold); }
-    #collab h2 { color: var(--white); }
-    #collab .divider { background: linear-gradient(90deg, var(--gold), transparent); }
+    #collab .eyebrow { color: var(--blue); }
+    #collab h2 { color: var(--text); }
+    #collab .divider { background: linear-gradient(90deg, var(--blue), transparent); }
     .collab-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; margin-top: 3rem; }
     .collab-item { display: flex; gap: 1.2rem; }
     .collab-dot {
       width: 36px; height: 36px; flex-shrink: 0;
-      border: 1px solid var(--gold);
+      border: 1px solid var(--blue);
       display: flex; align-items: center; justify-content: center;
-      font-family: 'Cormorant Garamond', serif; font-size: 1rem; color: var(--gold);
+      font-family: 'Raleway', sans-serif; font-size: 1rem; color: var(--blue);
     }
-    .collab-item h4 { font-family: 'Cormorant Garamond', serif; font-size: 1.05rem; color: var(--white); margin-bottom: 0.4rem; }
+    .collab-item h4 { font-family: 'Raleway', sans-serif; font-size: 1.05rem; color: var(--text); margin-bottom: 0.4rem; }
     .collab-item p { font-size: 0.87rem; color: rgba(255,255,255,0.5); margin: 0; }
 
     /* ── CTA ── */
     .about-cta {
-      background: linear-gradient(135deg, var(--gold-pale), var(--light2));
+      background: linear-gradient(135deg, var(--bg3), var(--bg2));
       border-top: 1px solid var(--border);
       padding: 6rem 5%; text-align: center;
     }
-    .about-cta h2 { color: var(--ink); }
-    .about-cta h2 span { color: var(--gold); font-style: italic; }
+    .about-cta h2 { color: var(--text); }
+    .about-cta h2 span { color: var(--blue); font-style: italic; }
     .about-cta p { margin: 1rem auto 2rem; max-width: 520px; }
 
     @media (max-width: 900px) {
@@ -224,7 +224,7 @@
 <section id="expertise">
   <div class="expertise-inner">
     <span class="eyebrow">Technical Expertise</span>
-    <h2 style="color:var(--ink);">Technologies &amp; Skills</h2>
+    <h2 style="color:var(--text);">Technologies &amp; Skills</h2>
     <div class="divider"></div>
     <div class="exp-grid">
       <div class="exp-card fade-up">
@@ -297,7 +297,7 @@
 <section id="industries">
   <div style="max-width:900px; margin:0 auto;">
     <span class="eyebrow">Industries</span>
-    <h2 style="color:var(--ink);">Experience Across Diverse Sectors</h2>
+    <h2 style="color:var(--text);">Experience Across Diverse Sectors</h2>
     <div class="divider"></div>
     <div class="ind-grid fade-up">
       <div class="ind-card">
