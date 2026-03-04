@@ -11,7 +11,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=Work+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
   <link rel="stylesheet" href="style.css?v=20250305"/>
   <!-- Google reCAPTCHA v2 -->
-  <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+  <script src="https://www.google.com/recaptcha/api.js?onload=onRecaptchaLoad&render=explicit" async defer></script>
   <!-- Invisible reCAPTCHA: silent verification, no checkbox shown to user -->
   <style>
 
@@ -501,11 +501,24 @@
 
   // ── FORM & CAPTCHA FLOW ──
   let pendingFormData = null;
+  let recaptchaWidgetId = null;
+
+  // Called by reCAPTCHA API once fully loaded (via onload= param in script URL)
+  function onRecaptchaLoad() {
+    recaptchaWidgetId = grecaptcha.render('recaptcha-widget', {
+      sitekey: '6LdV9X8sAAAAAGXDPbquKTH_2B1Sq5Mtvo7tYAkD',
+      size: 'invisible',
+      callback: onCaptchaPassed,
+      'expired-callback': function() {
+        grecaptcha.reset(recaptchaWidgetId);
+      }
+    });
+  }
 
   function handleSubmit(e) {
     e.preventDefault();
 
-    // Validate required fields first
+    // Validate required fields
     const fields = ['fname','lname','email','service','description'];
     let valid = true;
     fields.forEach(id => {
@@ -522,43 +535,39 @@
       return;
     }
 
-    // Show the popup immediately in "Verifying" state
-    // Invisible reCAPTCHA fires automatically via the button's data-callback
+    // Store form data and show popup
     pendingFormData = new FormData(document.getElementById('contact-form'));
     showState('captcha');
     document.getElementById('captcha-overlay').classList.add('active');
-    // Programmatically trigger invisible reCAPTCHA
-    if (window.grecaptcha) {
-      grecaptcha.execute();
+
+    // Execute invisible reCAPTCHA — onCaptchaPassed fires automatically on success
+    if (recaptchaWidgetId !== null) {
+      grecaptcha.execute(recaptchaWidgetId);
     } else {
-      // Fallback if reCAPTCHA hasn't loaded (e.g. no site key yet)
-      onCaptchaPassed('no-recaptcha-token');
+      // Fallback: reCAPTCHA not loaded
+      onCaptchaPassed('');
     }
   }
 
   function showState(state) {
-    document.getElementById('state-captcha').style.display  = state === 'captcha'  ? 'block' : 'none';
-    document.getElementById('state-sending').style.display  = state === 'sending'  ? 'flex'  : 'none';
-    document.getElementById('state-success').style.display  = state === 'success'  ? 'flex'  : 'none';
+    document.getElementById('state-captcha').style.display  = state === 'captcha' ? 'block' : 'none';
+    document.getElementById('state-sending').style.display  = state === 'sending' ? 'flex'  : 'none';
+    document.getElementById('state-success').style.display  = state === 'success' ? 'flex'  : 'none';
     document.getElementById('captcha-cancel-btn').style.display = state === 'captcha' ? 'inline-block' : 'none';
   }
 
   function closeCaptcha() {
     document.getElementById('captcha-overlay').classList.remove('active');
-    // Reset reCAPTCHA widget so it's fresh next time
-    if (window.grecaptcha) {
-      try { grecaptcha.reset(); } catch(e) {}
+    if (recaptchaWidgetId !== null) {
+      try { grecaptcha.reset(recaptchaWidgetId); } catch(err) {}
     }
     pendingFormData = null;
     showState('captcha');
   }
 
-  // Called automatically by reCAPTCHA when user checks the box
   async function onCaptchaPassed(token) {
     showState('sending');
-
-    // Append the reCAPTCHA token so Formspree can verify it
-    pendingFormData.append('g-recaptcha-response', token);
+    if (token) pendingFormData.append('g-recaptcha-response', token);
 
     try {
       const res = await fetch('https://formspree.io/f/xqeyzzzr', {
@@ -569,27 +578,24 @@
 
       if (res.ok) {
         showState('success');
-        // After 2.5s: close popup, reset form, scroll back to top of form
         setTimeout(() => {
           document.getElementById('captcha-overlay').classList.remove('active');
           document.getElementById('contact-form').reset();
           showState('captcha');
+          if (recaptchaWidgetId !== null) {
+            try { grecaptcha.reset(recaptchaWidgetId); } catch(err) {}
+          }
           document.getElementById('contact-main').scrollIntoView({ behavior: 'smooth' });
         }, 2500);
       } else {
+        const data = await res.json().catch(() => ({}));
+        const reason = (data.errors && data.errors.map(e => e.message).join(', ')) || data.error || 'Unknown error';
         closeCaptcha();
-        alert('Something went wrong sending your message. Please try again.');
+        alert('Submission failed (' + res.status + '): ' + reason);
       }
     } catch (err) {
       closeCaptcha();
       alert('Network error. Please check your connection and try again.');
-    }
-  }
-
-  function onCaptchaExpired() {
-    // Token expired — reset so user can try again
-    if (window.grecaptcha) {
-      try { grecaptcha.reset(); } catch(e) {}
     }
   }
 
