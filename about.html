@@ -435,9 +435,11 @@
   document.getElementById('nav-toggle').addEventListener('click', () => {
     document.getElementById('nav-links').classList.toggle('open');
   });
+  // Add animate class first so elements start hidden, then reveal on scroll
+  document.querySelectorAll('.fade-up').forEach(el => el.classList.add('animate'));
   const obs = new IntersectionObserver(entries => {
     entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
-  }, { threshold: 0.1 });
+  }, { threshold: 0.08 });
   document.querySelectorAll('.fade-up').forEach(el => obs.observe(el));
 </script>
 </body>
