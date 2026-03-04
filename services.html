@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Services | TheWebNMore Solutions</title>
+  <meta name="description" content="Comprehensive QA testing services — web, mobile, database, on-demand support, test planning and project management."/>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400;1,500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="style.css"/>
+  <style>
+
+    /* ── SERVICES DETAIL ── */
+    #services-detail { background: var(--white); padding: 7rem 5%; }
+    .svc-block {
+      display: grid; grid-template-columns: 1fr 1.6fr;
+      gap: 4rem; align-items: start;
+      padding: 4rem 0; border-bottom: 1px solid var(--border-grey);
+      max-width: 1100px; margin: 0 auto;
+    }
+    .svc-block:last-child { border-bottom: none; }
+    .svc-block.reverse { direction: rtl; }
+    .svc-block.reverse > * { direction: ltr; }
+
+    .svc-icon-box {
+      background: var(--light);
+      border: 1px solid var(--border-grey);
+      aspect-ratio: 1;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center; gap: 1rem;
+      padding: 3rem; text-align: center;
+      transition: border-color 0.3s;
+    }
+    .svc-icon-box:hover { border-color: var(--gold); }
+    .svc-icon-box .icon { font-size: 3rem; }
+    .svc-icon-box h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.3rem; color: var(--ink);
+    }
+    .svc-icon-box .icon-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 4rem; font-weight: 300; color: var(--gold-dim); line-height: 1;
+    }
+
+    .svc-content h2 {
+      font-size: clamp(1.6rem, 3vw, 2.2rem); color: var(--ink); margin-bottom: 0.5rem;
+    }
+    .svc-content p { margin-bottom: 1.2rem; }
+    .svc-features { list-style: none; margin-top: 1.5rem; }
+    .svc-features li {
+      display: flex; gap: 0.8rem; align-items: flex-start;
+      padding: 0.65rem 0; border-bottom: 1px solid var(--border-grey);
+      font-size: 0.9rem; color: var(--muted);
+    }
+    .svc-features li:last-child { border-bottom: none; }
+    .svc-features li::before { content: '→'; color: var(--gold); flex-shrink: 0; margin-top: 0.05rem; }
+
+    /* ── ON-DEMAND FEATURE ── */
+    #on-demand {
+      background: var(--light);
+      padding: 7rem 5%;
+    }
+    .od-grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 3rem; max-width: 1100px; margin: 3rem auto 0;
+    }
+    .od-feature {
+      background: var(--white);
+      border: 1px solid var(--border-grey);
+      padding: 2.5rem;
+      transition: border-color 0.3s, box-shadow 0.3s;
+    }
+    .od-feature:hover { border-color: var(--gold); box-shadow: var(--shadow); }
+    .od-feature .f-icon { font-size: 1.8rem; margin-bottom: 1rem; }
+    .od-feature h4 { font-family: 'Cormorant Garamond', serif; font-size: 1.2rem; color: var(--ink); margin-bottom: 0.6rem; }
+    .od-feature p { font-size: 0.87rem; margin: 0; }
+
+    /* ── PROCESS ── */
+    #process { background: var(--white); padding: 7rem 5%; }
+    .process-inner { max-width: 1000px; margin: 0 auto; }
+    .process-track {
+      display: grid; grid-template-columns: repeat(4, 1fr);
+      gap: 0; margin-top: 3rem; position: relative;
+    }
+    .process-track::before {
+      content: '';
+      position: absolute; top: 35px; left: 10%; right: 10%; height: 1px;
+      background: linear-gradient(90deg, var(--gold), var(--teal));
+    }
+    .proc-step { text-align: center; padding: 0 1rem; }
+    .proc-circle {
+      width: 70px; height: 70px; border-radius: 50%;
+      border: 2px solid var(--gold); background: var(--white);
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 1.2rem;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.5rem; color: var(--gold);
+      position: relative; z-index: 1;
+      transition: background 0.3s, color 0.3s;
+    }
+    .proc-step:hover .proc-circle { background: var(--gold); color: var(--white); }
+    .proc-step h4 { font-family: 'Cormorant Garamond', serif; font-size: 1.05rem; color: var(--ink); margin-bottom: 0.5rem; }
+    .proc-step p { font-size: 0.82rem; }
+
+    /* ── TEST PLAN ── */
+    #test-plan { background: var(--ink); padding: 7rem 5%; }
+    #test-plan .eyebrow { color: var(--gold); }
+    #test-plan h2 { color: var(--white); }
+    .plan-grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 2px; background: rgba(255,255,255,0.08);
+      margin-top: 3rem; max-width: 900px;
+    }
+    .plan-box { background: var(--ink2); padding: 2.5rem; }
+    .plan-box h4 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.1rem; color: var(--teal); margin-bottom: 1.2rem;
+    }
+    .plan-box ul { list-style: none; }
+    .plan-box ul li {
+      font-size: 0.88rem; color: rgba(255,255,255,0.6);
+      padding: 0.5rem 0; border-bottom: 1px solid rgba(255,255,255,0.06);
+      display: flex; gap: 0.7rem; align-items: flex-start;
+    }
+    .plan-box ul li:last-child { border-bottom: none; }
+    .plan-box ul li::before { content: '✦'; color: var(--gold); font-size: 0.55rem; margin-top: 0.3rem; flex-shrink: 0; }
+
+    /* ── PRICING NOTE ── */
+    .pricing-note {
+      background: var(--gold-pale);
+      border: 1px solid var(--border);
+      padding: 4rem 5%; text-align: center;
+    }
+    .pricing-note h2 { color: var(--ink); }
+    .pricing-note h2 span { color: var(--gold); font-style: italic; }
+    .pricing-note p { max-width: 560px; margin: 1rem auto 2rem; }
+    .pricing-cards {
+      display: flex; gap: 1.5rem; justify-content: center;
+      flex-wrap: wrap; margin-top: 2.5rem;
+    }
+    .price-card {
+      background: var(--white); border: 1px solid var(--border-grey);
+      padding: 2rem 2.5rem; min-width: 220px; text-align: center;
+      transition: border-color 0.3s, box-shadow 0.3s;
+    }
+    .price-card:hover { border-color: var(--gold); box-shadow: var(--shadow); }
+    .price-card .p-icon { font-size: 2rem; margin-bottom: 0.8rem; }
+    .price-card h4 { font-family: 'Cormorant Garamond', serif; font-size: 1.15rem; color: var(--ink); margin-bottom: 0.5rem; }
+    .price-card p { font-size: 0.85rem; margin: 0; }
+
+    @media (max-width: 900px) {
+      .svc-block, .svc-block.reverse { grid-template-columns: 1fr; direction: ltr; }
+      .od-grid { grid-template-columns: 1fr; }
+      .process-track { grid-template-columns: 1fr 1fr; gap: 2rem; }
+      .process-track::before { display: none; }
+      .plan-grid { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 600px) {
+      .process-track { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="main-nav">
+  <a href="index.html" class="nav-logo">TheWebN<span>More</span></a>
+  <ul class="nav-links" id="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="services.html" class="active">Services</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+  <a href="contact.html" class="nav-cta">Free Consultation</a>
+  <button class="nav-toggle" id="nav-toggle" aria-label="Toggle menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- PAGE HERO -->
+<div class="page-hero">
+  <div class="page-hero-content container">
+    <span class="eyebrow">Services</span>
+    <h1>Comprehensive <em>QA Testing</em><br>Built Around Your Needs</h1>
+    <p>Helping build successful, high-quality products by ensuring thorough quality checks, optimizing processes, and collaborating with teams to deliver reliable, high-performing solutions.</p>
+  </div>
+</div>
+
+<!-- SERVICES DETAIL -->
+<section id="services-detail">
+
+  <div class="svc-block fade-up">
+    <div class="svc-icon-box">
+      <div class="icon-num">01</div>
+      <div class="icon">🌐</div>
+      <h3>Web &amp; Mobile Testing</h3>
+    </div>
+    <div class="svc-content">
+      <span class="eyebrow">Core Service</span>
+      <h2>Web &amp; Mobile Testing</h2>
+      <div class="divider"></div>
+      <p>
+        Comprehensive functional, regression, and user acceptance testing across web and mobile
+        platforms. I ensure your application delivers a flawless, consistent experience for
+        every user, on every device and browser.
+      </p>
+      <p>
+        From responsive layout validation to end-to-end workflow testing, every aspect of your
+        user-facing application is rigorously tested before it reaches production.
+      </p>
+      <ul class="svc-features">
+        <li>Functional &amp; regression testing across all major browsers</li>
+        <li>Mobile responsiveness validation (iOS &amp; Android)</li>
+        <li>User Acceptance Testing (UAT) support</li>
+        <li>End-to-end workflow and integration testing</li>
+        <li>Smoke and sanity testing for rapid release cycles</li>
+        <li>Clear bug reports with reproducible steps</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="svc-block reverse fade-up">
+    <div class="svc-icon-box">
+      <div class="icon-num">02</div>
+      <div class="icon">🗄️</div>
+      <h3>Database Testing</h3>
+    </div>
+    <div class="svc-content">
+      <span class="eyebrow">Core Service</span>
+      <h2>Database Testing</h2>
+      <div class="divider"></div>
+      <p>
+        Thorough validation of data integrity, consistency, and performance to ensure your
+        database layer is robust and reliable. Bad data corrupts user trust — I help you
+        catch problems before they affect your customers.
+      </p>
+      <p>
+        Whether you're running complex queries, migrations, or multi-system integrations,
+        I validate that data flows correctly and reliably throughout your application.
+      </p>
+      <ul class="svc-features">
+        <li>Data integrity and consistency validation</li>
+        <li>Query performance and optimization testing</li>
+        <li>Database migration testing and verification</li>
+        <li>CRUD operation validation</li>
+        <li>Multi-system data flow and integration checks</li>
+        <li>Backup and recovery testing</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="svc-block fade-up">
+    <div class="svc-icon-box">
+      <div class="icon-num">03</div>
+      <div class="icon">📋</div>
+      <h3>Test Plan &amp; Strategy</h3>
+    </div>
+    <div class="svc-content">
+      <span class="eyebrow">Core Service</span>
+      <h2>Test Plan &amp; Strategy</h2>
+      <div class="divider"></div>
+      <p>
+        Developing a comprehensive test plan is essential for ensuring the delivery of
+        high-quality applications. A well-structured test plan outlines the testing strategy
+        and helps identify potential issues early, leading to smoother deployment and enhanced
+        user experience.
+      </p>
+      <p>
+        I also have experience developing comprehensive project roadmaps, timelines, and
+        processes, as well as identifying and mitigating potential risks and challenges.
+      </p>
+      <ul class="svc-features">
+        <li>Test strategy development aligned to your SDLC</li>
+        <li>Test case design and documentation</li>
+        <li>Test metrics and reporting frameworks</li>
+        <li>QA process setup and optimization</li>
+        <li>Project roadmaps and milestone planning</li>
+        <li>Risk identification and mitigation planning</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="svc-block reverse fade-up">
+    <div class="svc-icon-box">
+      <div class="icon-num">04</div>
+      <div class="icon">🔁</div>
+      <h3>Regression Testing</h3>
+    </div>
+    <div class="svc-content">
+      <span class="eyebrow">Core Service</span>
+      <h2>Regression Testing</h2>
+      <div class="divider"></div>
+      <p>
+        Every new feature or bug fix introduces the risk of breaking existing functionality.
+        Systematic regression testing ensures your product remains stable through every
+        release cycle, giving your team confidence to ship frequently.
+      </p>
+      <p>
+        I design and execute regression suites tailored to your application's critical paths,
+        so you can move fast without breaking things.
+      </p>
+      <ul class="svc-features">
+        <li>Full and partial regression suite execution</li>
+        <li>Release-readiness assessment</li>
+        <li>Regression coverage mapping</li>
+        <li>Pre- and post-deployment validation</li>
+        <li>Documented pass/fail results with metrics</li>
+        <li>Defect lifecycle tracking and reporting</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="svc-block fade-up">
+    <div class="svc-icon-box">
+      <div class="icon-num">05</div>
+      <div class="icon">📊</div>
+      <h3>Project Management</h3>
+    </div>
+    <div class="svc-content">
+      <span class="eyebrow">Core Service</span>
+      <h2>Project Management</h2>
+      <div class="divider"></div>
+      <p>
+        Beyond testing, I bring project management expertise to help your team stay on track.
+        I develop comprehensive project roadmaps, timelines, and processes, ensuring every
+        milestone is clearly defined and achievable.
+      </p>
+      <p>
+        My approach centers on proactive communication, risk management, and continuous
+        alignment between your development and quality goals.
+      </p>
+      <ul class="svc-features">
+        <li>Project roadmap and timeline development</li>
+        <li>SDLC process design and documentation</li>
+        <li>Cross-team coordination and communication</li>
+        <li>Risk identification and mitigation strategies</li>
+        <li>QA team building and process optimization</li>
+        <li>Status reporting and stakeholder updates</li>
+      </ul>
+    </div>
+  </div>
+
+</section>
+
+<!-- ON-DEMAND -->
+<section id="on-demand">
+  <div style="text-align:center; max-width:700px; margin:0 auto;">
+    <span class="eyebrow">On-Demand Support</span>
+    <h2 style="color:var(--ink);">Need Quick Testing Support?</h2>
+    <div class="divider centered"></div>
+    <p>Whether it's a last-minute release or a critical bug fix, on-demand QA testing is ready when you need it. Fast, reliable, and professional — with or without a long-term commitment.</p>
+  </div>
+  <div class="od-grid">
+    <div class="od-feature fade-up">
+      <div class="f-icon">⚡</div>
+      <h4>Fast Response Time</h4>
+      <p>I can jump in quickly, delivering high-quality testing with fast turnaround to meet your immediate needs. No long lead times.</p>
+    </div>
+    <div class="od-feature fade-up">
+      <div class="f-icon">💰</div>
+      <h4>Pay-As-You-Go Pricing</h4>
+      <p>Reasonable, flexible pricing with no long-term commitment required. Whether you need 1 hour or 1 week, you pay for what you need.</p>
+    </div>
+    <div class="od-feature fade-up">
+      <div class="f-icon">📄</div>
+      <h4>Clear Bug Reports</h4>
+      <p>Every testing engagement delivers clear, documented bug reports with reproducible steps, severity ratings, and actionable findings.</p>
+    </div>
+    <div class="od-feature fade-up">
+      <div class="f-icon">🔧</div>
+      <h4>Adapts to Your Schedule</h4>
+      <p>I adapt to your project's timeline and requirements, whether you're in a sprint crunch or planning for a major release.</p>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section id="process">
+  <div class="process-inner">
+    <span class="eyebrow centered" style="display:block; text-align:center;">How We'll Work Together</span>
+    <h2 style="color:var(--ink); text-align:center;">From First Call to Confident Launch</h2>
+    <div class="divider centered"></div>
+    <div class="process-track">
+      <div class="proc-step fade-up">
+        <div class="proc-circle">1</div>
+        <h4>Quick Call</h4>
+        <p>We discuss your app, goals, and how QA fits in. Free 30-minute consultation.</p>
+      </div>
+      <div class="proc-step fade-up">
+        <div class="proc-circle">2</div>
+        <h4>First Test</h4>
+        <p>Run a test sprint and send clear, documented results with actionable findings.</p>
+      </div>
+      <div class="proc-step fade-up">
+        <div class="proc-circle">3</div>
+        <h4>Ongoing Support</h4>
+        <p>Weekly or monthly testing cycles, adjusted as your product grows.</p>
+      </div>
+      <div class="proc-step fade-up">
+        <div class="proc-circle">4</div>
+        <h4>You Ship</h4>
+        <p>Confidently deploy, with one less thing to worry about.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TEST PLAN BREAKDOWN -->
+<section id="test-plan">
+  <span class="eyebrow">Deliverables</span>
+  <h2>What Your Test Plan May Include</h2>
+  <div class="divider" style="background: linear-gradient(90deg, var(--gold), transparent);"></div>
+  <div class="plan-grid fade-up">
+    <div class="plan-box">
+      <h4>Testing Documentation</h4>
+      <ul>
+        <li>Test Cases</li>
+        <li>Test Results</li>
+        <li>Test Metrics</li>
+        <li>Bug Reports with Reproducible Steps</li>
+        <li>Defect Severity &amp; Priority Ratings</li>
+        <li>Test Coverage Reports</li>
+      </ul>
+    </div>
+    <div class="plan-box">
+      <h4>Planning &amp; Strategy</h4>
+      <ul>
+        <li>QA Processes &amp; Workflows</li>
+        <li>Project Roadmaps</li>
+        <li>Project Timelines</li>
+        <li>Risk Identification &amp; Mitigation</li>
+        <li>Release Readiness Checklists</li>
+        <li>Ongoing QA Recommendations</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING NOTE -->
+<div class="pricing-note">
+  <span class="eyebrow">Flexible Pricing</span>
+  <h2>Testing That Fits <span>Your Budget</span></h2>
+  <p>No one-size-fits-all pricing. Every project is different — reach out and we'll find an arrangement that works for you.</p>
+  <div class="pricing-cards">
+    <div class="price-card fade-up">
+      <div class="p-icon">⏱️</div>
+      <h4>Hourly</h4>
+      <p>Perfect for targeted testing sessions or quick validation work.</p>
+    </div>
+    <div class="price-card fade-up">
+      <div class="p-icon">📅</div>
+      <h4>Project-Based</h4>
+      <p>A fixed scope with clear deliverables, ideal for release cycles.</p>
+    </div>
+    <div class="price-card fade-up">
+      <div class="p-icon">🔄</div>
+      <h4>Ongoing Retainer</h4>
+      <p>Monthly support for teams that need continuous QA coverage.</p>
+    </div>
+  </div>
+  <div style="margin-top:2.5rem;">
+    <a href="contact.html" class="btn btn-gold">Get a Custom Quote</a>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <div class="nav-logo">TheWebN<span>More</span></div>
+      <p>Elevating software quality, one test at a time. Reliable QA testing and project management services for teams of all sizes.</p>
+    </div>
+    <div class="footer-col">
+      <h5>Pages</h5>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h5>Services</h5>
+      <ul>
+        <li><a href="services.html">Web &amp; Mobile Testing</a></li>
+        <li><a href="services.html">Database Testing</a></li>
+        <li><a href="services.html">On-Demand QA</a></li>
+        <li><a href="services.html">Test Planning</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h5>Contact</h5>
+      <ul>
+        <li><a href="contact.html">Book a Consultation</a></li>
+        <li><a href="contact.html">Free 30-Min Call</a></li>
+        <li><a href="contact.html">Send a Message</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2025 TheWebNMore Solutions. All rights reserved.</p>
+    <p>Reliable Software QA Testing · On Demand</p>
+  </div>
+</footer>
+
+<script>
+  window.addEventListener('scroll', () => {
+    document.getElementById('main-nav').classList.toggle('scrolled', window.scrollY > 30);
+  });
+  document.getElementById('nav-toggle').addEventListener('click', () => {
+    document.getElementById('nav-links').classList.toggle('open');
+  });
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.fade-up').forEach(el => obs.observe(el));
+</script>
+</body>
+</html>

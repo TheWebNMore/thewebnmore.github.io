@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Contact | TheWebNMore Solutions</title>
+  <meta name="description" content="Book a free 30-minute QA consultation. Share your project details and we'll be in touch."/>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400;1,500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="style.css"/>
+  <style>
+
+    /* ── CONTACT LAYOUT ── */
+    #contact-main { background: var(--white); padding: 7rem 5%; }
+    .contact-grid {
+      display: grid; grid-template-columns: 1fr 1.4fr;
+      gap: 5rem; max-width: 1100px; margin: 0 auto;
+    }
+
+    /* ── INFO SIDE ── */
+    .contact-info h2 { color: var(--ink); margin-bottom: 0.5rem; }
+    .contact-info > p { margin-bottom: 2.5rem; }
+
+    .steps-list { list-style: none; margin-bottom: 3rem; }
+    .step-item { display: flex; gap: 1.2rem; margin-bottom: 1.8rem; }
+    .step-badge {
+      width: 40px; height: 40px; flex-shrink: 0;
+      border: 2px solid var(--gold);
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.1rem; color: var(--gold); font-weight: 500;
+    }
+    .step-text h4 { font-family: 'Cormorant Garamond', serif; font-size: 1.05rem; color: var(--ink); margin-bottom: 0.3rem; }
+    .step-text p { font-size: 0.87rem; margin: 0; }
+
+    .info-cards { display: flex; flex-direction: column; gap: 1px; }
+    .info-card {
+      background: var(--light);
+      border: 1px solid var(--border-grey);
+      padding: 1.4rem 1.6rem;
+      display: flex; gap: 1rem; align-items: center;
+      transition: border-color 0.3s;
+    }
+    .info-card:hover { border-color: var(--gold); }
+    .info-card .i-icon { font-size: 1.3rem; flex-shrink: 0; }
+    .info-card h5 { font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.25rem; font-weight: 400; }
+    .info-card p { font-size: 0.9rem; color: var(--ink); margin: 0; font-weight: 500; }
+
+    /* ── FORM SIDE ── */
+    .contact-form-wrap {
+      background: var(--light);
+      border: 1px solid var(--border-grey);
+      padding: 3rem;
+    }
+    .form-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.5rem; color: var(--ink); margin-bottom: 0.3rem;
+    }
+    .form-subtitle { font-size: 0.87rem; margin-bottom: 2rem; }
+
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; }
+    .form-group { margin-bottom: 1.4rem; }
+    .form-group label {
+      display: block; font-size: 0.72rem; letter-spacing: 0.1em;
+      text-transform: uppercase; color: var(--muted); margin-bottom: 0.5rem;
+    }
+    .form-group input,
+    .form-group textarea,
+    .form-group select {
+      width: 100%; background: var(--white);
+      border: 1px solid var(--border-grey); color: var(--ink);
+      padding: 0.85rem 1rem; font-size: 0.9rem;
+      font-family: 'DM Sans', sans-serif;
+      outline: none; transition: border-color 0.3s, box-shadow 0.3s;
+      appearance: none;
+    }
+    .form-group input:focus,
+    .form-group textarea:focus,
+    .form-group select:focus {
+      border-color: var(--gold);
+      box-shadow: 0 0 0 3px rgba(184,146,42,0.08);
+    }
+    .form-group textarea { resize: vertical; min-height: 120px; }
+    .form-group select { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%236B7589' stroke-width='1.5' fill='none'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 1rem center; padding-right: 2.5rem; }
+
+    .btn-submit {
+      width: 100%; background: var(--gold); color: var(--white);
+      border: none; padding: 1rem;
+      font-size: 0.82rem; letter-spacing: 0.15em; text-transform: uppercase;
+      font-family: 'DM Sans', sans-serif; font-weight: 500;
+      cursor: pointer; transition: background 0.3s;
+    }
+    .btn-submit:hover { background: var(--gold-light); }
+
+    .form-note { font-size: 0.78rem; color: var(--muted); text-align: center; margin-top: 1rem; }
+
+    /* success state */
+    .form-success {
+      display: none; text-align: center; padding: 3rem 2rem;
+    }
+    .form-success .success-icon { font-size: 3rem; margin-bottom: 1rem; }
+    .form-success h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.8rem; color: var(--ink); margin-bottom: 0.5rem; }
+    .form-success p { color: var(--muted); }
+
+    /* ── FAQ ── */
+    #faq { background: var(--light); padding: 7rem 5%; }
+    .faq-inner { max-width: 780px; margin: 0 auto; }
+    .faq-item {
+      border-bottom: 1px solid var(--border-grey);
+    }
+    .faq-q {
+      width: 100%; background: none; border: none; cursor: pointer;
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 1.5rem 0; text-align: left;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.1rem; color: var(--ink);
+      transition: color 0.3s;
+    }
+    .faq-q:hover { color: var(--gold); }
+    .faq-q .arrow { font-size: 1.2rem; transition: transform 0.3s; color: var(--gold); }
+    .faq-q.open .arrow { transform: rotate(45deg); }
+    .faq-a {
+      max-height: 0; overflow: hidden; transition: max-height 0.4s ease;
+    }
+    .faq-a p { font-size: 0.9rem; padding: 0 0 1.5rem; }
+
+    /* ── CTA BOTTOM ── */
+    .contact-cta {
+      background: var(--ink); padding: 6rem 5%; text-align: center;
+    }
+    .contact-cta .eyebrow { color: var(--gold); }
+    .contact-cta h2 { color: var(--white); }
+    .contact-cta h2 span { color: var(--gold); font-style: italic; }
+    .contact-cta p { color: rgba(255,255,255,0.6); max-width: 500px; margin: 1rem auto 2rem; }
+
+    @media (max-width: 900px) {
+      .contact-grid { grid-template-columns: 1fr; gap: 3rem; }
+      .form-row { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="main-nav">
+  <a href="index.html" class="nav-logo">TheWebN<span>More</span></a>
+  <ul class="nav-links" id="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="services.html">Services</a></li>
+    <li><a href="contact.html" class="active">Contact</a></li>
+  </ul>
+  <a href="contact.html" class="nav-cta">Free Consultation</a>
+  <button class="nav-toggle" id="nav-toggle" aria-label="Toggle menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- PAGE HERO -->
+<div class="page-hero">
+  <div class="page-hero-content container">
+    <span class="eyebrow">Contact</span>
+    <h1>Let's Talk About<br><em>Your Project</em></h1>
+    <p>Book a free 30-minute consultation — no obligation, no pressure. Just a straightforward conversation about your QA needs.</p>
+  </div>
+</div>
+
+<!-- MAIN CONTACT -->
+<section id="contact-main">
+  <div class="contact-grid">
+
+    <!-- INFO -->
+    <div class="contact-info fade-up">
+      <span class="eyebrow">How to Get Started</span>
+      <h2>Three Simple Steps</h2>
+      <div class="divider"></div>
+      <p>Have a project, large or small? Simply send over the details below.</p>
+
+      <ul class="steps-list">
+        <li class="step-item">
+          <div class="step-badge">1</div>
+          <div class="step-text">
+            <h4>Describe Your Project</h4>
+            <p>Share a brief description of what needs to be tested or done, along with your timeline and goals.</p>
+          </div>
+        </li>
+        <li class="step-item">
+          <div class="step-badge">2</div>
+          <div class="step-text">
+            <h4>Receive Your Booking Link</h4>
+            <p>You'll receive an email with a link to book a FREE 30-minute consultation at a time that works for you.</p>
+          </div>
+        </li>
+        <li class="step-item">
+          <div class="step-badge">3</div>
+          <div class="step-text">
+            <h4>We Build a Plan Together</h4>
+            <p>We discuss your needs, agree on scope and approach, and get started — on your timeline.</p>
+          </div>
+        </li>
+      </ul>
+
+      <div class="info-cards">
+        <div class="info-card">
+          <span class="i-icon">⏱️</span>
+          <div>
+            <h5>Consultation</h5>
+            <p>Free 30-minute call, no strings attached</p>
+          </div>
+        </div>
+        <div class="info-card">
+          <span class="i-icon">📬</span>
+          <div>
+            <h5>Response Time</h5>
+            <p>Within 1 business day</p>
+          </div>
+        </div>
+        <div class="info-card">
+          <span class="i-icon">💼</span>
+          <div>
+            <h5>Availability</h5>
+            <p>On-demand &amp; ongoing engagements</p>
+          </div>
+        </div>
+        <div class="info-card">
+          <span class="i-icon">💰</span>
+          <div>
+            <h5>Pricing</h5>
+            <p>Flexible — hourly, project, or retainer</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- FORM -->
+    <div class="contact-form-wrap fade-up">
+      <div id="contact-form-inner">
+        <div class="form-title">Send Your Project Details</div>
+        <p class="form-subtitle">Fill in the form below and you'll hear back within 1 business day with your booking link.</p>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label>First Name *</label>
+            <input type="text" id="fname" placeholder="Jane" required/>
+          </div>
+          <div class="form-group">
+            <label>Last Name *</label>
+            <input type="text" id="lname" placeholder="Smith" required/>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>Email Address *</label>
+          <input type="email" id="email" placeholder="jane@yourcompany.com" required/>
+        </div>
+
+        <div class="form-group">
+          <label>Company / Team Name</label>
+          <input type="text" id="company" placeholder="Acme Corp (optional)"/>
+        </div>
+
+        <div class="form-group">
+          <label>Type of Service Needed *</label>
+          <select id="service" required>
+            <option value="">Select a service...</option>
+            <option>Web Testing</option>
+            <option>Mobile Testing</option>
+            <option>Database Testing</option>
+            <option>Test Plan / Strategy</option>
+            <option>Regression Testing</option>
+            <option>On-Demand QA Support</option>
+            <option>Project Management</option>
+            <option>Not sure — let's discuss</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label>Project Timeline</label>
+          <select id="timeline">
+            <option value="">Select your timeline...</option>
+            <option>ASAP / Urgent</option>
+            <option>Within 1–2 weeks</option>
+            <option>Within a month</option>
+            <option>Flexible / Ongoing</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label>Project Description *</label>
+          <textarea id="description" placeholder="Briefly describe what needs to be tested, your tech stack, and your goals..." required></textarea>
+        </div>
+
+        <button class="btn-submit" onclick="submitForm()">Send &amp; Book Free Consultation →</button>
+        <p class="form-note">🔒 Your information is kept confidential and never shared.</p>
+      </div>
+
+      <div class="form-success" id="form-success">
+        <div class="success-icon">✅</div>
+        <h3>Message Received!</h3>
+        <p>Thank you for reaching out. You'll receive an email shortly with your link to book a free 30-minute consultation.</p>
+        <div style="margin-top:2rem;">
+          <a href="services.html" class="btn btn-outline">Explore Services</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq">
+  <div class="faq-inner">
+    <span class="eyebrow">FAQ</span>
+    <h2 style="color:var(--ink);">Common Questions</h2>
+    <div class="divider"></div>
+
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">
+        What does the free consultation include?
+        <span class="arrow">+</span>
+      </button>
+      <div class="faq-a">
+        <p>The free 30-minute consultation is a no-obligation conversation about your project. We'll discuss your application, your goals, your current QA process (if any), and how I can help. You'll leave with a clear picture of next steps — no pressure to commit.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">
+        Do I need a long-term commitment?
+        <span class="arrow">+</span>
+      </button>
+      <div class="faq-a">
+        <p>Not at all. I offer flexible engagement models — hourly, project-based, or ongoing retainer. You can hire me for a single sprint, a specific release, or ongoing monthly support. Whatever works best for your team and budget.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">
+        How quickly can you start?
+        <span class="arrow">+</span>
+      </button>
+      <div class="faq-a">
+        <p>For on-demand or urgent requests, I can often start very quickly — sometimes within the same week. Reach out and describe your timeline and I'll let you know my current availability.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">
+        What if I'm not sure what type of testing I need?
+        <span class="arrow">+</span>
+      </button>
+      <div class="faq-a">
+        <p>That's completely fine — that's exactly what the consultation is for. Describe your project and goals in the form, and we'll figure out the right approach together during our call.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">
+        What industries do you work with?
+        <span class="arrow">+</span>
+      </button>
+      <div class="faq-a">
+        <p>I have experience across healthcare, education, biotechnology, transportation, e-Commerce, and gaming — as well as general SaaS and web applications. If you're unsure whether your industry fits, just reach out and ask.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">
+        What does the testing process look like?
+        <span class="arrow">+</span>
+      </button>
+      <div class="faq-a">
+        <p>After our consultation, I'll develop a test plan tailored to your project. I then execute testing and deliver clear, documented results — including bug reports with reproducible steps, severity ratings, and test metrics. You'll always know exactly what was tested and what was found.</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- CTA BOTTOM -->
+<div class="contact-cta">
+  <span class="eyebrow">Still Deciding?</span>
+  <h2>Let's make your next release <span>your best release.</span></h2>
+  <p>A free consultation costs nothing. A bad release costs everything.</p>
+  <a href="#contact-main" class="btn btn-gold">Book Your Free Consultation</a>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <div class="nav-logo">TheWebN<span>More</span></div>
+      <p>Elevating software quality, one test at a time. Reliable QA testing and project management services for teams of all sizes.</p>
+    </div>
+    <div class="footer-col">
+      <h5>Pages</h5>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h5>Services</h5>
+      <ul>
+        <li><a href="services.html">Web &amp; Mobile Testing</a></li>
+        <li><a href="services.html">Database Testing</a></li>
+        <li><a href="services.html">On-Demand QA</a></li>
+        <li><a href="services.html">Test Planning</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h5>Contact</h5>
+      <ul>
+        <li><a href="contact.html">Book a Consultation</a></li>
+        <li><a href="contact.html">Free 30-Min Call</a></li>
+        <li><a href="contact.html">Send a Message</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2025 TheWebNMore Solutions. All rights reserved.</p>
+    <p>Reliable Software QA Testing · On Demand</p>
+  </div>
+</footer>
+
+<script>
+  window.addEventListener('scroll', () => {
+    document.getElementById('main-nav').classList.toggle('scrolled', window.scrollY > 30);
+  });
+  document.getElementById('nav-toggle').addEventListener('click', () => {
+    document.getElementById('nav-links').classList.toggle('open');
+  });
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.fade-up').forEach(el => obs.observe(el));
+
+  function submitForm() {
+    const required = ['fname','lname','email','service','description'];
+    let valid = true;
+    required.forEach(id => {
+      const el = document.getElementById(id);
+      if (!el.value.trim()) {
+        el.style.borderColor = '#E05050';
+        valid = false;
+      } else {
+        el.style.borderColor = '';
+      }
+    });
+    if (!valid) return;
+    document.getElementById('contact-form-inner').style.display = 'none';
+    document.getElementById('form-success').style.display = 'block';
+  }
+
+  function toggleFaq(btn) {
+    const answer = btn.nextElementSibling;
+    const isOpen = btn.classList.contains('open');
+    document.querySelectorAll('.faq-q').forEach(q => {
+      q.classList.remove('open');
+      q.nextElementSibling.style.maxHeight = '0';
+    });
+    if (!isOpen) {
+      btn.classList.add('open');
+      answer.style.maxHeight = answer.scrollHeight + 'px';
+    }
+  }
+</script>
+</body>
+</html>

@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>About | TheWebNMore Solutions</title>
+  <meta name="description" content="20+ years of software QA experience across healthcare, education, biotech, e-Commerce, gaming and more."/>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400;1,500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="style.css"/>
+  <style>
+
+    /* ── BIO SECTION ── */
+    #bio { background: var(--white); padding: 7rem 5%; }
+    .bio-grid {
+      display: grid; grid-template-columns: 1fr 1.4fr;
+      gap: 5rem; align-items: start; max-width: 1100px; margin: 0 auto;
+    }
+    .bio-aside { position: sticky; top: 100px; }
+    .bio-badge {
+      background: var(--light);
+      border: 1px solid var(--border-grey);
+      padding: 2.5rem;
+      text-align: center;
+    }
+    .bio-badge .big-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 5rem; font-weight: 300; color: var(--gold); line-height: 1;
+    }
+    .bio-badge .big-label { font-size: 0.8rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
+    .bio-stats { margin-top: 1.5rem; display: flex; flex-direction: column; gap: 1px; }
+    .bio-stat {
+      background: var(--white); border: 1px solid var(--border-grey);
+      padding: 1rem 1.5rem;
+      display: flex; justify-content: space-between; align-items: center;
+    }
+    .bio-stat-label { font-size: 0.82rem; color: var(--muted); }
+    .bio-stat-val { font-size: 0.88rem; font-weight: 500; color: var(--ink); }
+
+    .bio-main h2 { color: var(--ink); margin-bottom: 0.5rem; }
+    .bio-main p { margin-bottom: 1.3rem; }
+    .quote-block {
+      border-left: 3px solid var(--gold);
+      background: var(--gold-pale);
+      padding: 1.5rem 2rem; margin: 2.5rem 0;
+    }
+    .quote-block p {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.25rem; font-style: italic; color: var(--ink);
+      line-height: 1.6; margin: 0;
+    }
+
+    /* ── TECH / EXPERTISE ── */
+    #expertise { background: var(--light); padding: 7rem 5%; }
+    .expertise-inner { max-width: 1100px; margin: 0 auto; }
+    .exp-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem; margin-top: 3rem;
+    }
+    .exp-card {
+      background: var(--white);
+      border: 1px solid var(--border-grey);
+      padding: 2rem;
+      transition: border-color 0.3s, box-shadow 0.3s;
+    }
+    .exp-card:hover { border-color: var(--gold); box-shadow: var(--shadow); }
+    .exp-card h4 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.1rem; color: var(--ink); margin-bottom: 1rem;
+      padding-bottom: 0.6rem; border-bottom: 1px solid var(--border-grey);
+    }
+    .exp-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+    .exp-tag {
+      font-size: 0.72rem; letter-spacing: 0.07em;
+      background: var(--light); border: 1px solid var(--border-grey);
+      color: var(--muted); padding: 0.28rem 0.7rem;
+    }
+
+    /* ── INDUSTRIES ── */
+    #industries { background: var(--white); padding: 7rem 5%; }
+    .ind-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 1px; background: var(--border-grey);
+      margin-top: 3rem; max-width: 900px;
+    }
+    .ind-card {
+      background: var(--white); padding: 2.5rem 2rem; text-align: center;
+      transition: background 0.3s;
+    }
+    .ind-card:hover { background: var(--gold-pale); }
+    .ind-icon { font-size: 2.2rem; display: block; margin-bottom: 0.8rem; }
+    .ind-card h4 { font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; color: var(--ink); }
+    .ind-card p { font-size: 0.82rem; margin-top: 0.4rem; }
+
+    /* ── COLLABORATION ── */
+    #collab { background: var(--ink); padding: 7rem 5%; }
+    .collab-inner { max-width: 900px; margin: 0 auto; }
+    #collab .eyebrow { color: var(--gold); }
+    #collab h2 { color: var(--white); }
+    #collab .divider { background: linear-gradient(90deg, var(--gold), transparent); }
+    .collab-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; margin-top: 3rem; }
+    .collab-item { display: flex; gap: 1.2rem; }
+    .collab-dot {
+      width: 36px; height: 36px; flex-shrink: 0;
+      border: 1px solid var(--gold);
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Cormorant Garamond', serif; font-size: 1rem; color: var(--gold);
+    }
+    .collab-item h4 { font-family: 'Cormorant Garamond', serif; font-size: 1.05rem; color: var(--white); margin-bottom: 0.4rem; }
+    .collab-item p { font-size: 0.87rem; color: rgba(255,255,255,0.5); margin: 0; }
+
+    /* ── CTA ── */
+    .about-cta {
+      background: linear-gradient(135deg, var(--gold-pale), var(--light2));
+      border-top: 1px solid var(--border);
+      padding: 6rem 5%; text-align: center;
+    }
+    .about-cta h2 { color: var(--ink); }
+    .about-cta h2 span { color: var(--gold); font-style: italic; }
+    .about-cta p { margin: 1rem auto 2rem; max-width: 520px; }
+
+    @media (max-width: 900px) {
+      .bio-grid { grid-template-columns: 1fr; }
+      .bio-aside { position: static; }
+      .exp-grid, .ind-grid { grid-template-columns: 1fr 1fr; }
+      .collab-grid { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 600px) {
+      .exp-grid, .ind-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="main-nav">
+  <a href="index.html" class="nav-logo">TheWebN<span>More</span></a>
+  <ul class="nav-links" id="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="about.html" class="active">About</a></li>
+    <li><a href="services.html">Services</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+  <a href="contact.html" class="nav-cta">Free Consultation</a>
+  <button class="nav-toggle" id="nav-toggle" aria-label="Toggle menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- PAGE HERO -->
+<div class="page-hero">
+  <div class="page-hero-content container">
+    <span class="eyebrow">About</span>
+    <h1>Dedicated to the <em>Highest Standards</em><br>of Quality</h1>
+    <p>20+ years of software testing experience across diverse industries and technologies.</p>
+  </div>
+</div>
+
+<!-- BIO -->
+<section id="bio">
+  <div class="bio-grid">
+    <div class="bio-aside fade-up">
+      <div class="bio-badge">
+        <div class="big-num">20+</div>
+        <div class="big-label">Years of Experience</div>
+      </div>
+      <div class="bio-stats">
+        <div class="bio-stat">
+          <span class="bio-stat-label">Specialization</span>
+          <span class="bio-stat-val">Software QA</span>
+        </div>
+        <div class="bio-stat">
+          <span class="bio-stat-label">Industries</span>
+          <span class="bio-stat-val">6+</span>
+        </div>
+        <div class="bio-stat">
+          <span class="bio-stat-label">Approach</span>
+          <span class="bio-stat-val">SDLC-Based</span>
+        </div>
+        <div class="bio-stat">
+          <span class="bio-stat-label">Availability</span>
+          <span class="bio-stat-val">On-Demand</span>
+        </div>
+        <div class="bio-stat">
+          <span class="bio-stat-label">Commitment</span>
+          <span class="bio-stat-val">Flexible</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="bio-main fade-up">
+      <span class="eyebrow">My Background</span>
+      <h2>Results-Driven. Quality-Focused.</h2>
+      <div class="divider"></div>
+      <p>
+        With over 20 years of experience in software testing across a wide range of applications
+        built on technologies such as .NET, ColdFusion, Java, and more, I bring a deep
+        understanding of the Software Development Life Cycle (SDLC) and strong problem-solving
+        skills to every project.
+      </p>
+      <p>
+        My background also includes project management, with a focus on developing and executing
+        comprehensive roadmaps and timelines to ensure successful delivery. I have a proven track
+        record of identifying and mitigating potential risks before they become costly problems.
+      </p>
+      <div class="quote-block">
+        <p>"Dedicated to ensuring every application meets the highest standards of quality and performance."</p>
+      </div>
+      <p>
+        I have an in-depth quality assurance background across a diverse range of software
+        industries, including healthcare, education, biotechnology, transportation, e-Commerce,
+        and gaming. As a results-driven, quality-focused professional, I emphasize clarity,
+        strategic efficiency, and streamlined processes to consistently deliver high-impact,
+        reliable outcomes.
+      </p>
+      <p>
+        I am committed to building high-performing QA processes, optimizing testing workflows,
+        and ensuring software meets both user expectations and industry standards.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERTISE -->
+<section id="expertise">
+  <div class="expertise-inner">
+    <span class="eyebrow">Technical Expertise</span>
+    <h2 style="color:var(--ink);">Technologies &amp; Skills</h2>
+    <div class="divider"></div>
+    <div class="exp-grid">
+      <div class="exp-card fade-up">
+        <h4>Technologies Tested</h4>
+        <div class="exp-tags">
+          <span class="exp-tag">.NET</span>
+          <span class="exp-tag">ColdFusion</span>
+          <span class="exp-tag">Java</span>
+          <span class="exp-tag">Web APIs</span>
+          <span class="exp-tag">REST</span>
+          <span class="exp-tag">SQL</span>
+        </div>
+      </div>
+      <div class="exp-card fade-up">
+        <h4>Testing Types</h4>
+        <div class="exp-tags">
+          <span class="exp-tag">Functional</span>
+          <span class="exp-tag">Regression</span>
+          <span class="exp-tag">UAT</span>
+          <span class="exp-tag">Smoke</span>
+          <span class="exp-tag">Integration</span>
+          <span class="exp-tag">System</span>
+        </div>
+      </div>
+      <div class="exp-card fade-up">
+        <h4>Platforms</h4>
+        <div class="exp-tags">
+          <span class="exp-tag">Web</span>
+          <span class="exp-tag">Mobile</span>
+          <span class="exp-tag">Database</span>
+          <span class="exp-tag">Desktop</span>
+          <span class="exp-tag">Cloud</span>
+        </div>
+      </div>
+      <div class="exp-card fade-up">
+        <h4>Documentation</h4>
+        <div class="exp-tags">
+          <span class="exp-tag">Test Cases</span>
+          <span class="exp-tag">Test Plans</span>
+          <span class="exp-tag">Bug Reports</span>
+          <span class="exp-tag">Test Metrics</span>
+          <span class="exp-tag">QA Processes</span>
+        </div>
+      </div>
+      <div class="exp-card fade-up">
+        <h4>Project Management</h4>
+        <div class="exp-tags">
+          <span class="exp-tag">Roadmaps</span>
+          <span class="exp-tag">Timelines</span>
+          <span class="exp-tag">SDLC</span>
+          <span class="exp-tag">Risk Analysis</span>
+          <span class="exp-tag">Workflows</span>
+        </div>
+      </div>
+      <div class="exp-card fade-up">
+        <h4>Methodologies</h4>
+        <div class="exp-tags">
+          <span class="exp-tag">Agile</span>
+          <span class="exp-tag">Waterfall</span>
+          <span class="exp-tag">Scrum</span>
+          <span class="exp-tag">Kanban</span>
+          <span class="exp-tag">Hybrid</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- INDUSTRIES -->
+<section id="industries">
+  <div style="max-width:900px; margin:0 auto;">
+    <span class="eyebrow">Industries</span>
+    <h2 style="color:var(--ink);">Experience Across Diverse Sectors</h2>
+    <div class="divider"></div>
+    <div class="ind-grid fade-up">
+      <div class="ind-card">
+        <span class="ind-icon">🏥</span>
+        <h4>Healthcare</h4>
+        <p>Patient-critical software requiring rigorous validation and compliance testing.</p>
+      </div>
+      <div class="ind-card">
+        <span class="ind-icon">🎓</span>
+        <h4>Education</h4>
+        <p>Learning management systems and educational platforms tested for reliability.</p>
+      </div>
+      <div class="ind-card">
+        <span class="ind-icon">🧬</span>
+        <h4>Biotechnology</h4>
+        <p>High-stakes scientific applications with precision data integrity requirements.</p>
+      </div>
+      <div class="ind-card">
+        <span class="ind-icon">🚌</span>
+        <h4>Transportation</h4>
+        <p>Logistics and routing software tested for performance and reliability at scale.</p>
+      </div>
+      <div class="ind-card">
+        <span class="ind-icon">🛒</span>
+        <h4>e-Commerce</h4>
+        <p>End-to-end testing of shopping, checkout, and payment systems.</p>
+      </div>
+      <div class="ind-card">
+        <span class="ind-icon">🎮</span>
+        <h4>Gaming</h4>
+        <p>Functional and performance testing of games across multiple platforms.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- COLLABORATION -->
+<section id="collab">
+  <div class="collab-inner">
+    <span class="eyebrow">How I Work</span>
+    <h2>Built for Collaboration</h2>
+    <div class="divider"></div>
+    <p style="color:rgba(255,255,255,0.6); max-width:580px;">
+      I integrate into your team and workflow — whether you need a single sprint of testing
+      or ongoing QA partnership. Clear communication and documented results at every step.
+    </p>
+    <div class="collab-grid fade-up">
+      <div class="collab-item">
+        <div class="collab-dot">1</div>
+        <div>
+          <h4>Quick Discovery Call</h4>
+          <p>We discuss your app, goals, stack, and how QA fits into your current process.</p>
+        </div>
+      </div>
+      <div class="collab-item">
+        <div class="collab-dot">2</div>
+        <div>
+          <h4>Tailored Test Plan</h4>
+          <p>I develop a test strategy specific to your product and risk areas.</p>
+        </div>
+      </div>
+      <div class="collab-item">
+        <div class="collab-dot">3</div>
+        <div>
+          <h4>Execution &amp; Reporting</h4>
+          <p>Thorough testing with clear, actionable bug reports and metrics.</p>
+        </div>
+      </div>
+      <div class="collab-item">
+        <div class="collab-dot">4</div>
+        <div>
+          <h4>Ongoing or On-Demand</h4>
+          <p>Continue with weekly/monthly support or call when you need it. You choose.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<div class="about-cta">
+  <span class="eyebrow">Let's Connect</span>
+  <h2>Ready to work with a <span>quality-first</span> tester?</h2>
+  <p>Book a free 30-minute consultation and let's talk about your project.</p>
+  <a href="contact.html" class="btn btn-gold">Book Free Consultation</a>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <div class="nav-logo">TheWebN<span>More</span></div>
+      <p>Elevating software quality, one test at a time. Reliable QA testing and project management services for teams of all sizes.</p>
+    </div>
+    <div class="footer-col">
+      <h5>Pages</h5>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h5>Services</h5>
+      <ul>
+        <li><a href="services.html">Web &amp; Mobile Testing</a></li>
+        <li><a href="services.html">Database Testing</a></li>
+        <li><a href="services.html">On-Demand QA</a></li>
+        <li><a href="services.html">Test Planning</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h5>Contact</h5>
+      <ul>
+        <li><a href="contact.html">Book a Consultation</a></li>
+        <li><a href="contact.html">Free 30-Min Call</a></li>
+        <li><a href="contact.html">Send a Message</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2025 TheWebNMore Solutions. All rights reserved.</p>
+    <p>Reliable Software QA Testing · On Demand</p>
+  </div>
+</footer>
+
+<script>
+  window.addEventListener('scroll', () => {
+    document.getElementById('main-nav').classList.toggle('scrolled', window.scrollY > 30);
+  });
+  document.getElementById('nav-toggle').addEventListener('click', () => {
+    document.getElementById('nav-links').classList.toggle('open');
+  });
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.fade-up').forEach(el => obs.observe(el));
+</script>
+</body>
+</html>
