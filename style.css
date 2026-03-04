@@ -23,17 +23,17 @@ html { scroll-behavior: smooth; }
 
 body {
   font-family: 'Work Sans', sans-serif;
-  background: #FFFFFF;
+  background: #F8FAFC;
   color: #0F172A;
   overflow-x: hidden;
   line-height: 1.6;
 }
 
-h1, h2, h3, h4 { font-family: 'Raleway', sans-serif; line-height: 1.15; color: #0F172A; }
+h1, h2, h3, h4 { font-family: 'Raleway', sans-serif; line-height: 1.15; color: #0F172A !important; }
 h1 { font-size: clamp(2.6rem, 6vw, 5rem); font-weight: 300; }
 h2 { font-size: clamp(1.8rem, 4vw, 2.8rem); font-weight: 400; }
 h3 { font-size: 1.35rem; font-weight: 600; }
-p  { font-size: 0.95rem; color: #475569; line-height: 1.8; }
+p  { font-size: 0.95rem; color: #334155; line-height: 1.8; }
 
 a { text-decoration: none; color: inherit; }
 
