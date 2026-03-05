@@ -531,12 +531,12 @@
       return;
     }
 
-    // Store form data and show verifying popup
+    // Store form data, show sending spinner immediately (reCAPTCHA runs invisibly)
     pendingFormData = new FormData(document.getElementById('contact-form'));
-    showState('captcha');
+    showState('sending');
     document.getElementById('captcha-overlay').classList.add('active');
 
-    // Execute invisible reCAPTCHA — onCaptchaPassed fires automatically on success
+    // Execute invisible reCAPTCHA silently — onCaptchaPassed fires automatically
     if (recaptchaWidgetId !== null) {
       grecaptcha.execute(recaptchaWidgetId);
     } else {
@@ -557,7 +557,7 @@
       try { grecaptcha.reset(recaptchaWidgetId); } catch(err) {}
     }
     pendingFormData = null;
-    showState('captcha');
+    showState('sending');
   }
 
   async function onCaptchaPassed(token) {
@@ -576,7 +576,7 @@
         setTimeout(() => {
           document.getElementById('captcha-overlay').classList.remove('active');
           document.getElementById('contact-form').reset();
-          showState('captcha');
+          showState('sending');
           if (recaptchaWidgetId !== null) {
             try { grecaptcha.reset(recaptchaWidgetId); } catch(err) {}
           }
